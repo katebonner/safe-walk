@@ -38,8 +38,10 @@ const commutesEl = {
   map: document.querySelector('.map-view'),
   initialStatePanel: document.querySelector('.commutes-initial-state'),
   destinationPanel: document.querySelector('.commutes-destinations'),
-  modal: document.querySelector('.commutes-modal-container'),
+  modal: document.querySelector('.commutes-modal-container')
 };
+
+console.log(commutesEl);
 
 
 // Element selectors for commutes destination panel.
@@ -175,11 +177,7 @@ function Commutes(configuration) {
   // SPECIFYING WHICH CONGROL ICONS TO INITIALIZE
   function initMapView() {
     const mapOptionConfig = configuration.mapOptions;
-    mapOptionConfig.fullscreenControl = false;
-    mapOptionConfig.streetViewControl = true;
-    mapOptionConfig.zoomControl = false;
     commutesMap = new google.maps.Map(commutesEl.map, mapOptionConfig);
-
 
     setTravelModeLayer(configuration.defaultTravelMode);
     createMarker(origin);
@@ -241,7 +239,7 @@ function Commutes(configuration) {
     const addCommutesButtonEls = document.querySelectorAll('.add-button');
     addCommutesButtonEls.forEach(addButton => {
       addButton.addEventListener('click', () => {
-        destinationModalEl.title.innerHTML = 'Add destination';
+        destinationModalEl.title.innerHTML = 'add home address';
         hideElement(destinationModalEl.deleteButton);
         hideElement(destinationModalEl.editButton);
         showElement(destinationModalEl.addButton);
@@ -900,8 +898,8 @@ var framePosLocal = JSON.parse(framePos);
   const CONFIGURATION = {
     "defaultTravelMode": "WALKING",
     "isMetric": false,
-    "mapOptions": {"center":framePosLocal,"fullscreenControl":true,"mapTypeControl":false,"streetViewControl":false,"zoom":12,"zoomControl":true,"maxZoom":20},
-    "mapsApiKey": "AIzaSyCmvFy0vhEH0h85SsPRfXqnOPPt26EMiXA"
+    "mapOptions": {"center":framePosLocal,"fullscreenControl":false,"mapTypeControl":false,"streetViewControl":false,"zoom":12,"zoomControl":false,"maxZoom":20, "mapId": "8f37e2919d4753a8"},
+    "mapsApiKey": "AIzaSyCmvFy0vhEH0h85SsPRfXqnOPPt26EMiXA",
   };
 
 
