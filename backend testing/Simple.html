@@ -1,0 +1,16 @@
+<title>Safe Walk</title>
+</head>
+
+<body>
+<h1>Find you way home!</h1>
+
+<div id="map" style="width:600px; height: 400px;"></div>
+
+<script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyB5uijdNdiYHE6vfZO_aFNb-Lq_pjZxMVA"></script>
+
+<script>
+	var map_parameters = { center: {lat: 47.490, lng: -117.585}, zoom: 8 };
+	var map = new google.maps.Map(document.getElementById('map'), map_parameters);
+</script>
+</body>
+</html>
