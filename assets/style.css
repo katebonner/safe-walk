@@ -493,7 +493,7 @@ body {
 }
 
 .commutes-modal .modal-action-bar .cancel-button {
-  color: var(--grey);
+  color: var(--white);
 }
 
 .commutes-modal .modal-action-bar .add-destination-button,
