@@ -1,25 +1,57 @@
 
+// USE STRICT MODE
 'use strict';
 
-/**
- * Element selectors for commutes widget.
- */
+/// GEOLOCATION STUFF
+// Note: This requires that you consent to location sharing when
+// prompted by your browser. If you see the error "The Geolocation service
+// failed.", it means you probably did not give permission for the browser to
+// locate you.
+
+    // Try HTML5 geolocation.
+    if (navigator.geolocation) {
+      navigator.geolocation.getCurrentPosition(
+        (position) => {
+          const pos = {
+            lat: position.coords.latitude,
+            lng: position.coords.longitude,
+          };
+        localStorage.setItem("position", JSON.stringify(pos));
+        //   infoWindow.setPosition(pos);
+        //   infoWindow.setContent("Location found.");
+        //   infoWindow.open(map);
+        //   map.setCenter(pos);
+        },
+      );
+    } else {
+      // Browser doesn't support Geolocation
+      console.log("browser doesnt support geolocation");
+    }
+
+
+/// GEOLOCATION STUFF
+
+
+
+// ELEMENT SELECTORS FOR COMMUTES WIDGET
 const commutesEl = {
   map: document.querySelector('.map-view'),
   initialStatePanel: document.querySelector('.commutes-initial-state'),
   destinationPanel: document.querySelector('.commutes-destinations'),
-  modal: document.querySelector('.commutes-modal-container'),
+  modal: document.querySelector('.commutes-modal-container')
 };
 
-/**
- * Element selectors for commutes destination panel.
- */
+console.log(commutesEl);
+
+
+// Element selectors for commutes destination panel.
 const destinationPanelEl = {
   container: commutesEl.destinationPanel.querySelector('.destinations-container'),
   list: commutesEl.destinationPanel.querySelector('.destination-list'),
   scrollLeftButton: commutesEl.destinationPanel.querySelector('.left-control'),
   scrollRightButton: commutesEl.destinationPanel.querySelector('.right-control'),
 };
+
 
 /**
  * Element selectors for commutes modal popup.
@@ -33,27 +65,20 @@ const destinationModalEl = {
   deleteButton: commutesEl.modal.querySelector('.delete-destination-button'),
   editButton: commutesEl.modal.querySelector('.edit-destination-button'),
   cancelButton: commutesEl.modal.querySelector('.cancel-button'),
-  getTravelModeInput: () => commutesEl.modal.querySelector('input[name="travel-mode"]:checked'),
+  getTravelModeInput: () => commutesEl.modal.querySelector('input[name="travel-mode"]:checked')
+//   getTravelModeInput: () => commutesEl.modal.querySelector('input[name="travel-mode"]:checked'),
 };
 
-/**
- * Max number of destination allowed to be added to commutes panel.
- */
+// Max number of destination allowed to be added to commutes panel
 const MAX_NUM_DESTINATIONS = 10;
 
-/**
- * Bounds to bias search within ~50km distance.
- */
+//Bounds to bias search within ~50km distance
 const BIAS_BOUND_DISTANCE = 0.5;
 
-/**
- * Hour in seconds.
- */
+//Hour in seconds
 const HOUR_IN_SECONDS = 3600;
 
-/**
- * Minutes in seconds.
- */
+//Minutes in seconds
 const MIN_IN_SECONDS = 60;
 
 /**
@@ -112,7 +137,9 @@ const TravelMode = {
 function Commutes(configuration) {
   let commutesMap;
   let activeDestinationIndex;
-  let origin = configuration.mapOptions.center;
+  var startingPosition = localStorage.getItem("position");
+  var startingPositionLocal = JSON.parse(startingPosition);
+  let origin = startingPositionLocal;
   let destinations = configuration.destination || [];
   let markerIndex = 0;
 
@@ -146,6 +173,8 @@ function Commutes(configuration) {
   /**
    * Initializes map view on commutes widget.
    */
+
+  // SPECIFYING WHICH CONGROL ICONS TO INITIALIZE
   function initMapView() {
     const mapOptionConfig = configuration.mapOptions;
     commutesMap = new google.maps.Map(commutesEl.map, mapOptionConfig);
@@ -210,14 +239,14 @@ function Commutes(configuration) {
     const addCommutesButtonEls = document.querySelectorAll('.add-button');
     addCommutesButtonEls.forEach(addButton => {
       addButton.addEventListener('click', () => {
-        destinationModalEl.title.innerHTML = 'Add destination';
+        destinationModalEl.title.innerHTML = 'add home address';
         hideElement(destinationModalEl.deleteButton);
         hideElement(destinationModalEl.editButton);
         showElement(destinationModalEl.addButton);
         showElement(commutesEl.modal, destinationModalEl.destinationInput);
-        const travelMode = configuration.defaultTravelMode || TravelMode.DRIVING;
-        const travelModeId = travelMode.toLowerCase() + '-mode';
-        document.forms['destination-form'][travelModeId].checked = true;
+        //const travelMode = configuration.defaultTravelMode || TravelMode.DRIVING;
+        //const travelModeId = travelMode.toLowerCase() + '-mode';
+        //document.forms['destination-form'][travelModeId].checked = true;
       });
     });
 
@@ -266,7 +295,7 @@ function Commutes(configuration) {
         return;
       } else {
         destinationToAdd = place;
-        destinationModalEl.getTravelModeInput().focus();
+        //destinationModalEl.getTravelModeInput().focus();
       }
       destinationModalEl.destinationInput.classList.remove('error');
       destinationModalEl.errorMessage.innerHTML = '';
@@ -275,7 +304,8 @@ function Commutes(configuration) {
     destinationModalEl.addButton.addEventListener('click', () => {
       const isValidInput = validateDestinationInput(destinationToAdd);
       if (!isValidInput) return;
-      const selectedTravelMode = destinationModalEl.getTravelModeInput().value;
+      //const selectedTravelMode = destinationModalEl.getTravelModeInput().value;
+      const selectedTravelMode = "WALKING";
       addDestinationToList(destinationToAdd, selectedTravelMode);
       destinationFormReset();
       hideElement(commutesEl.modal);
@@ -283,7 +313,8 @@ function Commutes(configuration) {
 
     destinationModalEl.editButton.addEventListener('click', () => {
       const destination = {...destinations[activeDestinationIndex]};
-      const selectedTravelMode = destinationModalEl.getTravelModeInput().value;
+      const selectedTravelMode = "WALKING";
+    //   const selectedTravelMode = destinationModalEl.getTravelModeInput().value;
       const isSameDestination =
           destination.name === destinationModalEl.destinationInput.value;
       const isSameTravelMode = destination.travelMode === selectedTravelMode;
@@ -861,17 +892,22 @@ function generateDestinationTemplate(destination) {
     </div>`;
 }
 
+var framePos = localStorage.getItem("position");
+var framePosLocal = JSON.parse(framePos);
+
   const CONFIGURATION = {
     "defaultTravelMode": "WALKING",
     "isMetric": false,
-    "mapOptions": {"center":{"lat":40.7485452,"lng":-73.98576349999999},"fullscreenControl":true,"mapTypeControl":false,"streetViewControl":false,"zoom":14,"zoomControl":true,"maxZoom":20},
-    "mapsApiKey": "AIzaSyCmvFy0vhEH0h85SsPRfXqnOPPt26EMiXA"
+    "mapOptions": {"center":framePosLocal,"fullscreenControl":false,"mapTypeControl":false,"streetViewControl":false,"zoom":12,"zoomControl":false,"maxZoom":20, "mapId": "8f37e2919d4753a8"},
+    "mapsApiKey": "AIzaSyCmvFy0vhEH0h85SsPRfXqnOPPt26EMiXA",
   };
+
+
 
   function initMap() {
     new Commutes(CONFIGURATION);
   }
-  
+
 // // HEAT MAP TEST
 // /* Data points defined as a mixture of WeightedLocation and LatLng objects */
 // var heatMapData = [
