@@ -17,9 +17,9 @@
 <html lang="en">
   <head>
     <title>safe walk</title>
-    <meta charset="utf-8"/>
-    <meta name="viewport" content="width=device-width,initial-scale=1">
-    <link rel="stylesheet" href="assets/style.css">
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1" />
+    <link rel="stylesheet" href="assets/style.css" />
   </head>
   <body>
     <!-- Defined commutes SVGs -->
@@ -129,26 +129,26 @@
 
     <main class="commutes">
       <div class="contacts">
-            <form>
-                <label for="exampleContactName">add emergency contact</label>
-                <input
-                  type="text"
-                  class="form-control name"
-                  id="exampleContactName"
-                  aria-describedby="contactName"
-                  placeholder="  name"
-                />
-        
-                <label for="examplePhoneNumber"></label>
-                <input
-                  type="tel"
-                  class="form-control mobileNumber"
-                  id="examplePhoneNumber"
-                  placeholder="  mobile number"
-                />
-              <button type="button" class="btn btn-primary submit">  submit</button>
-            </form>
-      </div>  
+        <form>
+          <label for="exampleContactName">add emergency contact</label>
+          <input
+            type="text"
+            class="form-control name"
+            id="exampleContactName"
+            aria-describedby="contactName"
+            placeholder="  name"
+          />
+
+          <label for="examplePhoneNumber"></label>
+          <input
+            type="tel"
+            class="form-control mobileNumber"
+            id="examplePhoneNumber"
+            placeholder="  mobile number"
+          />
+          <button type="button" class="btn btn-primary submit">submit</button>
+        </form>
+      </div>
       <div class="commutes-map" aria-label="Map">
         <div class="map-view"></div>
       </div>
@@ -235,19 +235,25 @@
             <div class="error-message"></div>
           </form>
           <div class="modal-action-bar">
-            <button class="delete-destination-button hide" type="reset">Delete</button>
+            <button class="delete-destination-button hide" type="reset">
+              Delete
+            </button>
             <button class="cancel-button" type="reset">Cancel</button>
             <button class="add-destination-button" type="button">Add</button>
-            <button class="edit-destination-button hide" type="button">Done</button>
+            <button class="edit-destination-button hide" type="button">
+              Done
+            </button>
           </div>
         </div>
       </div>
     </div>
     <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
-    <script async defer
-    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmvFy0vhEH0h85SsPRfXqnOPPt26EMiXA&libraries=visualization,places,geometry&solution_channel=GMP_QB_commutes_v1_c&callback=initMap"
-    type="text/javascript"
-  ></script>
+    <script
+      async
+      defer
+      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmvFy0vhEH0h85SsPRfXqnOPPt26EMiXA&libraries=visualization,places,geometry&solution_channel=GMP_QB_commutes_v1_c&callback=initMap"
+      type="text/javascript"
+    ></script>
     <script src="./assets/script.js"></script>
     <script src="./assets/script2.js"></script>
   </body>
