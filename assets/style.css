@@ -1,12 +1,12 @@
 :root {
-  --greenBright: #B5F44A;
-  --green: #70EE9C;
-  --greenDull: #79AEA3;
-  --purple: #8377D1;
+  --greenBright: #b5f44a;
+  --green: #70ee9c;
+  --greenDull: #79aea3;
+  --purple: #8377d1;
   --black: rgb(0, 0, 0);
   --grey: rgba(20, 20, 20, 0.8);
   --white: rgb(255, 255, 255);
-  letter-spacing: .2em;
+  letter-spacing: 0.2em;
   font-family: avenir, sans-serif;
 }
 
@@ -146,7 +146,8 @@ body {
   border-radius: 40px;
   border-style: none;
   bottom: 35px;
-  box-shadow: 0 2px 3px 0 rgb(60 64 67 / 30%), 0 6px 10px 4px rgb(60 64 67 / 15%);
+  box-shadow: 0 2px 3px 0 rgb(60 64 67 / 30%),
+    0 6px 10px 4px rgb(60 64 67 / 15%);
   cursor: pointer;
   fill: var(--black);
   height: 40px;
@@ -195,7 +196,8 @@ body {
 
 .commutes-destinations .destination {
   border-radius: 4px;
-  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3), 0 1px 3px 1px rgba(60, 64, 67, 0.15);
+  box-shadow: 0 1px 2px 0 rgba(60, 64, 67, 0.3),
+    0 1px 3px 1px rgba(60, 64, 67, 0.15);
   color: var(--white);
   cursor: pointer;
   display: flex;
@@ -212,7 +214,7 @@ body {
 
 .commutes-destinations .active:after {
   background-color: var(--green);
-  content: '';
+  content: "";
   display: block;
   height: 4px;
   left: 0;
@@ -235,14 +237,12 @@ body {
 }
 
 .commutes-destinations .destination:hover,
-.commutes-destinations .destination:focus-within
-{
+.commutes-destinations .destination:focus-within {
   background-color: var(--grey);
 }
 
 .commutes-destinations .destination:hover .edit-button,
-.commutes-destinations .destination:focus-within .edit-button
-{
+.commutes-destinations .destination:focus-within .edit-button {
   display: block;
 }
 
@@ -382,7 +382,8 @@ body {
 .commutes-modal {
   background: var(--grey);
   border-radius: 4px;
-  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.14), 0 1px 10px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 2px 4px -1px rgba(0, 0, 0, 0.2), 0 4px 5px rgba(0, 0, 0, 0.14),
+    0 1px 10px rgba(0, 0, 0, 0.12);
   height: 256px;
   position: absolute;
   width: 360px;
@@ -427,7 +428,7 @@ body {
   width: 100%;
 }
 
-.commutes-modal .travel-modes [type=radio] {
+.commutes-modal .travel-modes [type="radio"] {
   height: 0;
   opacity: 0;
   position: absolute;
@@ -498,7 +499,7 @@ body {
 
 .commutes-modal .modal-action-bar .add-destination-button,
 .commutes-modal .modal-action-bar .edit-destination-button {
-  color: #B5F44A;
+  color: #b5f44a;
 }
 
 .hide {
