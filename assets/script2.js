@@ -8,6 +8,7 @@ function contactSave() {
   console.log(contactName, mobileNumber);
   localStorage.setItem("contactName", contactName);
   localStorage.setItem("mobileNumber", mobileNumber);
+  $(".form-control").val("");
 }
 
 submitEl.addEventListener("click", contactSave);
