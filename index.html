@@ -16,10 +16,10 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <title>Commutes and Destinations Map</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="assets/style.css" />
+    <title>safe walk</title>
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <link rel="stylesheet" href="assets/style.css">
   </head>
   <body>
     <!-- Defined commutes SVGs -->
@@ -48,19 +48,6 @@
         </symbol>
       </defs>
       <use href="#commutes-add-icon" />
-    </svg>
-    <svg class="hide">
-      <defs>
-        <symbol id="commutes-driving-icon">
-          <path d="M0 0h24v24H0V0z" fill="none" />
-          <path
-            d="M18.92 6.01C18.72 5.42 18.16 5 17.5 5h-11c-.66 0-1.21.42-1.42 1.01L3 12v8c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-1h12v1c0 .55.45 1 1 1h1c.55 0 1-.45 1-1v-8l-2.08-5.99zM6.85 7h10.29l1.08 3.11H5.77L6.85 7zM19 17H5v-5h14v5z"
-          />
-          <circle cx="7.5" cy="14.5" r="1.5" />
-          <circle cx="16.5" cy="14.5" r="1.5" />
-        </symbol>
-      </defs>
-      <use href="#commutes-driving-icon" />
     </svg>
     <svg class="hide">
       <defs>
@@ -129,17 +116,6 @@
     </svg>
     <svg class="hide">
       <defs>
-        <symbol id="commutes-directions-icon">
-          <path d="M0 0h24v24H0V0z" fill="none" />
-          <path
-            d="M22.43 10.59l-9.01-9.01c-.75-.75-2.07-.76-2.83 0l-9 9c-.78.78-.78 2.04 0 2.82l9 9c.39.39.9.58 1.41.58.51 0 1.02-.19 1.41-.58l8.99-8.99c.79-.76.8-2.02.03-2.82zm-10.42 10.4l-9-9 9-9 9 9-9 9zM8 11v4h2v-3h4v2.5l3.5-3.5L14 7.5V10H9c-.55 0-1 .45-1 1z"
-          />
-        </symbol>
-      </defs>
-      <use href="#commute-directions-icon" />
-    </svg>
-    <svg class="hide">
-      <defs>
         <symbol id="commutes-edit-icon">
           <path d="M0 0h24v24H0V0z" fill="none" />
           <path
@@ -152,26 +128,38 @@
     <!-- End commutes SVGs -->
 
     <main class="commutes">
+      <div class="contacts">
+            <form>
+                <label for="exampleContactName">add emergency contact</label>
+                <input
+                  type="text"
+                  class="form-control name"
+                  id="exampleContactName"
+                  aria-describedby="contactName"
+                  placeholder="  name"
+                />
+        
+                <label for="examplePhoneNumber"></label>
+                <input
+                  type="tel"
+                  class="form-control mobileNumber"
+                  id="examplePhoneNumber"
+                  placeholder="  mobile number"
+                />
+              <button type="button" class="btn btn-primary submit">  submit</button>
+            </form>
+      </div>  
       <div class="commutes-map" aria-label="Map">
         <div class="map-view"></div>
       </div>
 
       <div class="commutes-info">
         <div class="commutes-initial-state">
-          <svg
-            aria-label="Directions Icon"
-            width="53"
-            height="53"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <use href="#commutes-initial-icon" />
-          </svg>
           <div class="description">
             <h1 class="heading">find your safe walk home</h1>
             <p>see travel time and directions</p>
           </div>
-          <button class="add-button" autofocus>
+          <button class="add-button">
             <svg
               aria-label="Add Icon"
               width="24px"
@@ -240,102 +228,27 @@
               type="text"
               id="destination-address-input"
               name="destination-address"
-              placeholder="Enter a place or address"
+              placeholder="enter a place or address"
               autocomplete="off"
               required
             />
             <div class="error-message"></div>
-            <div class="travel-modes">
-              <input
-                type="radio"
-                name="travel-mode"
-                id="driving-mode"
-                value="DRIVING"
-                aria-label="Driving travel mode"
-              />
-              <label
-                for="driving-mode"
-                class="left-label"
-                title="Driving travel mode"
-              >
-                <svg
-                  aria-label="Driving icon"
-                  mlns="http://www.w3.org/2000/svg"
-                >
-                  <use href="#commutes-driving-icon" />
-                </svg>
-              </label>
-              <input
-                type="radio"
-                name="travel-mode"
-                id="transit-mode"
-                value="TRANSIT"
-                aria-label="Public transit travel mode"
-              />
-              <label for="transit-mode" title="Public transit travel mode">
-                <svg
-                  aria-label="Public transit icon"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <use href="#commutes-transit-icon" />
-                </svg>
-              </label>
-              <input
-                type="radio"
-                name="travel-mode"
-                id="bicycling-mode"
-                value="BICYCLING"
-                aria-label="Bicycling travel mode"
-              />
-              <label for="bicycling-mode" title="Bicycling travel mode">
-                <svg
-                  aria-label="Bicycling icon"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <use href="#commutes-bicycling-icon" />
-                </svg>
-              </label>
-              <input
-                type="radio"
-                name="travel-mode"
-                id="walking-mode"
-                value="WALKING"
-                aria-label="Walking travel mode"
-              />
-              <label
-                for="walking-mode"
-                class="right-label"
-                title="Walking travel mode"
-              >
-                <svg
-                  aria-label="Walking icon"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <use href="#commutes-walking-icon" />
-                </svg>
-              </label>
-            </div>
-            -->
           </form>
           <div class="modal-action-bar">
-            <button class="delete-destination-button hide" type="reset">
-              Delete
-            </button>
+            <button class="delete-destination-button hide" type="reset">Delete</button>
             <button class="cancel-button" type="reset">Cancel</button>
             <button class="add-destination-button" type="button">Add</button>
-            <button class="edit-destination-button hide" type="button">
-              Done
-            </button>
+            <button class="edit-destination-button hide" type="button">Done</button>
           </div>
         </div>
       </div>
     </div>
+    <script src="https://code.jquery.com/jquery-3.4.1.min.js"></script>
+    <script async defer
+    src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmvFy0vhEH0h85SsPRfXqnOPPt26EMiXA&libraries=visualization,places,geometry&solution_channel=GMP_QB_commutes_v1_c&callback=initMap"
+    type="text/javascript"
+  ></script>
     <script src="./assets/script.js"></script>
-    <script
-      src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmvFy0vhEH0h85SsPRfXqnOPPt26EMiXA&callback=initMap&libraries=places,geometry&solution_channel=GMP_QB_commutes_v1_c"
-      async
-      defer
-    ></script>
-    <!-- <script async src="https://maps.googleapis.com/maps/api/js?key=AIzaSyCmvFy0vhEH0h85SsPRfXqnOPPt26EMiXA&libraries=visualization&callback=initMap"></script> -->
+    <script src="./assets/script2.js"></script>
   </body>
 </html>

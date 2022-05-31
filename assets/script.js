@@ -2,13 +2,8 @@
 // USE STRICT MODE
 'use strict';
 
-/// GEOLOCATION STUFF
-// Note: This requires that you consent to location sharing when
-// prompted by your browser. If you see the error "The Geolocation service
-// failed.", it means you probably did not give permission for the browser to
-// locate you.
+// GETS CURRENT POSITION OF USER FROM GEOLOCATION SERVICES
 
-    // Try HTML5 geolocation.
     if (navigator.geolocation) {
       navigator.geolocation.getCurrentPosition(
         (position) => {
@@ -29,10 +24,6 @@
     }
 
 
-/// GEOLOCATION STUFF
-
-
-
 // ELEMENT SELECTORS FOR COMMUTES WIDGET
 const commutesEl = {
   map: document.querySelector('.map-view'),
@@ -40,9 +31,6 @@ const commutesEl = {
   destinationPanel: document.querySelector('.commutes-destinations'),
   modal: document.querySelector('.commutes-modal-container')
 };
-
-console.log(commutesEl);
-
 
 // Element selectors for commutes destination panel.
 const destinationPanelEl = {
@@ -181,6 +169,20 @@ function Commutes(configuration) {
 
     setTravelModeLayer(configuration.defaultTravelMode);
     createMarker(origin);
+
+    // HEAT MAP DATA TEST
+    var heatMapData = [
+        {location: new google.maps.LatLng(40.748, -73.985), weight: 100},
+        {location: new google.maps.LatLng(40.731, -73.997), weight: 25},
+        {location: new google.maps.LatLng(40.735, -73.992), weight: 50},
+    ];
+  
+    var heatmap = new google.maps.visualization.HeatmapLayer({
+        data: heatMapData
+    });
+
+    heatmap.setMap(commutesMap);
+   
   }
 
   /**
@@ -852,23 +854,15 @@ function handlePanelScroll() {
   }
 }
 
-/**
- * Generates new destination template based on destination info properties.
- */
+// DYNAMICALLY GENERATES NEW DESTINATION DIV BASED OFF DESTINATION INFO
+
 function generateDestinationTemplate(destination) {
   const travelModeIconTemplate = '<use href="#commutes-' +
       destination.travelMode.toLowerCase() + '-icon"/>';
   return `
     <div class="destination-content">
       <div class="metadata">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-            ${travelModeIconTemplate}
-        </svg>
         ${destination.distance}
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <use href="#commutes-arrow-icon"/>
-        </svg>
-        <span class="location-marker">${destination.label}</span>
       </div>
       <div class="address">To
         <abbr title="${destination.name}">${destination.name}</abbr>
@@ -877,24 +871,17 @@ function generateDestinationTemplate(destination) {
     </div>
 
     <div class="destination-controls">
-      <a class="directions-button" href=${destination.url} target="_blank"
-         aria-label="Link to directions in Google Maps">
-        <svg aria-label="Directions icon" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <use href="#commutes-directions-icon"/>
-        </svg>
-      </a>
       <button class="edit-button" aria-label="Edit Destination">
-        <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
-          <use href="#commutes-edit-icon"/>
-        </svg>
         Edit
       </button>
     </div>`;
 }
 
+// GET USERS CURRENT GEOGRAPHIC LOCATION FROM LOCAL STORAGE
 var framePos = localStorage.getItem("position");
 var framePosLocal = JSON.parse(framePos);
 
+// MAP CONFIGURATION + AESTHETIC ID
   const CONFIGURATION = {
     "defaultTravelMode": "WALKING",
     "isMetric": false,
@@ -902,41 +889,10 @@ var framePosLocal = JSON.parse(framePos);
     "mapsApiKey": "AIzaSyCmvFy0vhEH0h85SsPRfXqnOPPt26EMiXA",
   };
 
-
-
   function initMap() {
     new Commutes(CONFIGURATION);
   }
 
-// // HEAT MAP TEST
-// /* Data points defined as a mixture of WeightedLocation and LatLng objects */
-// var heatMapData = [
-//     {location: new google.maps.LatLng(37.782, -122.447), weight: 0.5},
-//     new google.maps.LatLng(37.782, -122.445),
-//     {location: new google.maps.LatLng(37.782, -122.443), weight: 2},
-//     {location: new google.maps.LatLng(37.782, -122.441), weight: 3},
-//     {location: new google.maps.LatLng(37.782, -122.439), weight: 2},
-//     new google.maps.LatLng(37.782, -122.437),
-//     {location: new google.maps.LatLng(37.782, -122.435), weight: 0.5},
-  
-//     {location: new google.maps.LatLng(37.785, -122.447), weight: 3},
-//     {location: new google.maps.LatLng(37.785, -122.445), weight: 2},
-//     new google.maps.LatLng(37.785, -122.443),
-//     {location: new google.maps.LatLng(37.785, -122.441), weight: 0.5},
-//     new google.maps.LatLng(37.785, -122.439),
-//     {location: new google.maps.LatLng(37.785, -122.437), weight: 2},
-//     {location: new google.maps.LatLng(37.785, -122.435), weight: 3}
-//   ];
-  
-//   var sanFrancisco = new google.maps.LatLng(37.774546, -122.433523);
-  
-//   map = new google.maps.Map(document.getElementById('map'), {
-//     center: sanFrancisco,
-//     zoom: 13,
-//     mapTypeId: 'satellite'
-//   });
-  
-//   var heatmap = new google.maps.visualization.HeatmapLayer({
-//     data: heatMapData
-//   });
-//   heatmap.setMap(map);
+
+
+

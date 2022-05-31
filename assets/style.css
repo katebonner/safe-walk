@@ -17,6 +17,37 @@ body {
   padding: 0;
 }
 
+.contacts{
+  background-color: var(--black);
+  display: flex;
+  justify-content: center;
+  padding: 2%;
+  height: 5%;
+  z-index: 999999;
+}
+
+.form-control{
+  background-color: var(--black);
+  color: var(--white);
+  border-radius: 15px;
+  border: solid var(--white) 1px;
+}
+
+.submit {
+  align-self: center;
+  text-align: center;
+  background-color: var(--green);
+  border-color: var(--green);
+  border-radius: 15px;
+  border-style: solid;
+  color: var(--black);
+  cursor: pointer;
+  display: inline-flex;
+  fill: var(--grey);
+  padding: 8px 16px 8px 8px;
+  white-space: nowrap;
+}
+
 .commutes {
   align-content: stretch;
   color: var(--white);
@@ -28,6 +59,7 @@ body {
   min-width: 360px;
   overflow: auto;
   width: 100%;
+  background-color: var(--black);
 }
 
 .commutes-modal h2 {
@@ -336,6 +368,7 @@ body {
   fill: var(--grey);
   color: var(--white);
   cursor: pointer;
+  text-align: center;
 }
 
 .commutes-destinations .destination .edit-button svg {
@@ -362,7 +395,6 @@ body {
   height: 100%;
   left: 0;
   position: absolute;
-  top: 0;
   width: 100%;
 }
 
@@ -395,12 +427,12 @@ body {
   gap: 16px;
 }
 .commutes-modal .heading {
-  font: 24px/32px Arial, sans-serif;
+  font: 24px/32px avenir, sans-serif;
   margin: 0;
 }
 
 .commutes-modal input {
-  font: 16px/24px Arial, sans-serif;
+  font: 16px/24px avenir, sans-serif;
   padding: 10px;
   box-sizing: border-box;
   width: 100%;
@@ -414,7 +446,7 @@ body {
 .commutes-modal .error-message {
   color: #c03;
   display: inline-block;
-  font: 12px/14px Arial, sans-serif;
+  font: 12px/14px avenir, sans-serif;
   margin: 0 0 5px;
 }
 
