@@ -1,13 +1,17 @@
-// POST API FOR MESSAGE ALERTS"
+// Download the helper library from https://www.twilio.com/docs/node/install
+// Find your Account SID and Auth Token at twilio.com/console
+// and set the environment variables. See http://twil.io/secure
 
-var request = require("request");
-var options = {
-  method: "POST",
-  url: "https://http-api.d7networks.com/send?username=cywf3599&password=sGAowHn6&dlr-method=POST &dlr-url=https://4ba60af1.ngrok.io/receive&dlr=yes&dlr-level=3&from=smsinfo &content=This is the sample content sent to test &to=5164048703",
-  headers: {},
-  formData: {},
-};
-request(options, function (error, response) {
-  if (error) throw new Error(error);
-  console.log(response.body);
-});
+fetch(
+  "https://api.twilio.com/2010-04-01/Accounts/{ACe994be0ee460cf4c6c1ab1bd1584e8d4}/Messages.json"
+);
+const accountSid = process.env.TWILIO_ACCOUNT_SID;
+const authToken = process.env.TWILIO_AUTH_TOKEN;
+const client = require("twilio")(
+  ACe994be0ee460cf4c6c1ab1bd1584e8d4,
+  d51b8959dd7cc478fbff8eeae9a42422
+);
+
+client.messages
+  .create({ body: "I have arrived.", from: "+19302057266", to: "+15164048703" })
+  .then((message) => console.log(message.sid));
