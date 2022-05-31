@@ -169,6 +169,21 @@ function Commutes(configuration) {
 
     setTravelModeLayer(configuration.defaultTravelMode);
     createMarker(origin);
+    console.log(origin);
+
+    // HEAT MAP DATA 
+    var lat = origin.lat;
+    var lon = origin.lng;
+
+    fetch("https://api.crimeometer.com/v1/incidents/raw-data?lat=" + lat+ "&lon=" + lon +"&datetime_ini=2022-01-01T14:59:55.711Z&datetime_end=2022-05-01T14:59:55.711Z&distance=10mi",
+       {headers: {'x-api-key': 'pgbV1LizyJ4fsUTmFh3bz193057NtVTh12U2UAyp'}})
+       .then((data) => 
+        data.json().then((data) => {
+            console.log(data)
+        })
+       )
+
+
 
     // HEAT MAP DATA TEST
     var heatMapData = [
