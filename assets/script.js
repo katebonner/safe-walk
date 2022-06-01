@@ -174,27 +174,43 @@ function Commutes(configuration) {
     // HEAT MAP DATA 
     var lat = origin.lat;
     var lon = origin.lng;
+    var heatMapCrimeData = [];
 
     fetch("https://api.crimeometer.com/v1/incidents/raw-data?lat=" + lat+ "&lon=" + lon +"&datetime_ini=2022-01-01T14:59:55.711Z&datetime_end=2022-05-01T14:59:55.711Z&distance=10mi",
        {headers: {'x-api-key': 'pgbV1LizyJ4fsUTmFh3bz193057NtVTh12U2UAyp'}})
        .then((data) => 
         data.json().then((data) => {
             console.log(data)
+            for (var i = 0 ; i < data.incidents.length ; i++) {
+                var incident_lat = data.incidents[i].incident_latitude;
+                var incident_lon = data.incidents[i].incident_longitude;
+                if (data.incidents[i].incident_offense === "Assault Offenses") {
+                    var crimeDataObj = {
+                        location: new google.maps.LatLng(incident_lat, incident_lon), 
+                        weight: 100}
+                    heatMapCrimeData.push(crimeDataObj);
+                }
+                if (data.incidents[i].incident_offense === "Robbery") {
+                    var crimeDataObj = {
+                        location: new google.maps.LatLng(incident_lat, incident_lon), 
+                        weight: 100}
+                    heatMapCrimeData.push(crimeDataObj);
+                }
+                if (data.incidents[i].incident_offense === "Larceny/Theft Offenses") {
+                    var crimeDataObj = {
+                        location: new google.maps.LatLng(incident_lat, incident_lon), 
+                        weight: 100}
+                    heatMapCrimeData.push(crimeDataObj);
+                }
+            }
         })
        )
-
-
-
-    // HEAT MAP DATA TEST
-    var heatMapData = [
-        {location: new google.maps.LatLng(40.748, -73.985), weight: 100},
-        {location: new google.maps.LatLng(40.731, -73.997), weight: 25},
-        {location: new google.maps.LatLng(40.735, -73.992), weight: 50},
-    ];
   
     var heatmap = new google.maps.visualization.HeatmapLayer({
-        data: heatMapData
+        data: heatMapCrimeData
     });
+
+    console.log(heatMapCrimeData);
 
     heatmap.setMap(commutesMap);
    
