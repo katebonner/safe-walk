@@ -12,10 +12,6 @@
             lng: position.coords.longitude,
           };
         localStorage.setItem("position", JSON.stringify(pos));
-        //   infoWindow.setPosition(pos);
-        //   infoWindow.setContent("Location found.");
-        //   infoWindow.open(map);
-        //   map.setCenter(pos);
         },
       );
     } else {
@@ -74,12 +70,12 @@ const MIN_IN_SECONDS = 60;
  */
 const STROKE_COLORS = {
   active: {
-    innerStroke: '#4285F4',
-    outerStroke: '#185ABC',
+    innerStroke: '#70EE9C',
+    outerStroke: '#70EE9C',
   },
   inactive: {
-    innerStroke: '#BDC1C6',
-    outerStroke: '#80868B',
+    innerStroke: '#FFFFFF',
+    outerStroke: '#FFFFFF',
   },
 };
 
@@ -88,14 +84,14 @@ const STROKE_COLORS = {
  */
 const MARKER_ICON_COLORS = {
   active: {
-    fill: '#EA4335',
-    stroke: '#C5221F',
-    label: '#FFF',
+    fill: '#B5F44A',
+    stroke: '#B5F44A',
+    label: '#B5F44A',
   },
   inactive: {
-    fill: '#F1F3F4',
-    stroke: '#9AA0A6',
-    label: '#3C4043',
+    fill: '#FFFFFF',
+    stroke: '#FFFFFF',
+    label: '#FFFFFF',
   },
 };
 
@@ -171,44 +167,92 @@ function Commutes(configuration) {
     createMarker(origin);
     console.log(origin);
 
+    // COLLECT THE CURRENT TIME EVERY SECOND
+function getTheDate() {
+    var currentdate = new Date(); 
+    var datetime = {
+        year: currentdate.getFullYear(),
+        month: (currentdate.getMonth()+1),
+        day: currentdate.getDate(),
+        hour: currentdate.getHours(),
+        minute: currentdate.getMinutes(),
+        second: currentdate.getSeconds()
+    }
+    return datetime
+}
+
     // HEAT MAP DATA 
     var lat = origin.lat;
     var lon = origin.lng;
     var heatMapCrimeData = [];
 
-    fetch("https://api.crimeometer.com/v1/incidents/raw-data?lat=" + lat+ "&lon=" + lon +"&datetime_ini=2022-01-01T14:59:55.711Z&datetime_end=2022-05-01T14:59:55.711Z&distance=10mi",
-       {headers: {'x-api-key': 'pgbV1LizyJ4fsUTmFh3bz193057NtVTh12U2UAyp'}})
-       .then((data) => 
-        data.json().then((data) => {
-            console.log(data)
-            for (var i = 0 ; i < data.incidents.length ; i++) {
-                var incident_lat = data.incidents[i].incident_latitude;
-                var incident_lon = data.incidents[i].incident_longitude;
-                if (data.incidents[i].incident_offense === "Assault Offenses") {
-                    var crimeDataObj = {
-                        location: new google.maps.LatLng(incident_lat, incident_lon), 
-                        weight: 100}
-                    heatMapCrimeData.push(crimeDataObj);
-                }
-                if (data.incidents[i].incident_offense === "Robbery") {
-                    var crimeDataObj = {
-                        location: new google.maps.LatLng(incident_lat, incident_lon), 
-                        weight: 100}
-                    heatMapCrimeData.push(crimeDataObj);
-                }
-                if (data.incidents[i].incident_offense === "Larceny/Theft Offenses") {
-                    var crimeDataObj = {
-                        location: new google.maps.LatLng(incident_lat, incident_lon), 
-                        weight: 100}
-                    heatMapCrimeData.push(crimeDataObj);
-                }
-            }
-        })
-       )
-  
+    // fetch("https://api.crimeometer.com/v1/incidents/raw-data?lat=" + lat+ "&lon=" + lon +"&datetime_ini=2022-01-01T14:59:55.711Z&datetime_end=2022-05-01T14:59:55.711Z&distance=10mi",
+    //    {headers: {'x-api-key': 'pgbV1LizyJ4fsUTmFh3bz193057NtVTh12U2UAyp'}})
+    //    .then((data) => 
+    //     data.json().then((data) => {
+    //         console.log(data)
+    //         for (var i = 0 ; i < data.incidents.length ; i++) {
+    //             var incident_lat = data.incidents[i].incident_latitude;
+    //             var incident_lon = data.incidents[i].incident_longitude;
+    //             if (data.incidents[i].incident_offense === "Assault Offenses") {
+    //                 var crimeDataObj = {
+    //                     location: new google.maps.LatLng(incident_lat, incident_lon), 
+    //                     weight: 50}
+    //                 heatMapCrimeData.push(crimeDataObj);
+    //             }
+    //             if (data.incidents[i].incident_offense === "Robbery") {
+    //                 var crimeDataObj = {
+    //                     location: new google.maps.LatLng(incident_lat, incident_lon), 
+    //                     weight: 25}
+    //                 heatMapCrimeData.push(crimeDataObj);
+    //             }
+    //             if (data.incidents[i].incident_offense === "Larceny/Theft Offenses") {
+    //                 var crimeDataObj = {
+    //                     location: new google.maps.LatLng(incident_lat, incident_lon), 
+    //                     weight: 15}
+    //                 heatMapCrimeData.push(crimeDataObj);
+    //             }
+    //         }
+    //     })
+    //    )
+
+    var dummyData = [
+        {location: new google.maps.LatLng( 40.7323614, -73.9948174), weight: 50},
+        {location: new google.maps.LatLng( 40.735614, -73.9958174), weight: 50},
+        {location: new google.maps.LatLng( 40.7373614, -73.9928174), weight: 50},
+        {location: new google.maps.LatLng( 40.7363614, -73.9948174), weight: 50},
+        {location: new google.maps.LatLng( 40.7353614, -73.9848174), weight: 50},
+        {location: new google.maps.LatLng( 40.7343614, -73.947174), weight: 50},
+        {location: new google.maps.LatLng( 40.7333614, -73.9938174), weight: 50},
+        {location: new google.maps.LatLng( 40.7323614, -73.9908174), weight: 50},
+        {location: new google.maps.LatLng( 40.7313614, -73.9918174), weight: 50},
+        {location: new google.maps.LatLng( 40.7393614, -73.9938174), weight: 50},
+        {location: new google.maps.LatLng( 40.7303614, -73.9948174), weight: 50},
+        {location: new google.maps.LatLng( 40.7323614, -73.9948174), weight: 50}
+    ] 
+
+    var gradient = [
+          'rgba(0, 255, 255, 0)',
+          'rgba(0, 255, 255, 1)',
+          'rgba(0, 191, 255, 1)',
+          'rgba(0, 127, 255, 1)',
+          'rgba(0, 63, 255, 1)',
+          'rgba(0, 0, 255, 1)',
+          'rgba(0, 0, 223, 1)',
+          'rgba(0, 0, 191, 1)',
+          'rgba(0, 0, 159, 1)',
+          'rgba(0, 0, 127, 1)',
+          'rgba(63, 0, 91, 1)',
+          'rgba(127, 0, 63, 1)',
+          'rgba(191, 0, 31, 1)',
+          'rgba(255, 0, 0, 1)'
+        ]
+    
     var heatmap = new google.maps.visualization.HeatmapLayer({
-        data: heatMapCrimeData
+        data: dummyData
     });
+
+    heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
 
     console.log(heatMapCrimeData);
 
@@ -277,9 +321,6 @@ function Commutes(configuration) {
         hideElement(destinationModalEl.editButton);
         showElement(destinationModalEl.addButton);
         showElement(commutesEl.modal, destinationModalEl.destinationInput);
-        //const travelMode = configuration.defaultTravelMode || TravelMode.DRIVING;
-        //const travelModeId = travelMode.toLowerCase() + '-mode';
-        //document.forms['destination-form'][travelModeId].checked = true;
       });
     });
 
