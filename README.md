@@ -56,7 +56,7 @@ This project maps a user's current location to a map, layered with a heat map th
 This site fetches map data from the [Google Maps API](https://developers.google.com/maps) and the crime location data from the [CrimeoMeter API](https://www.crimeometer.com/)
 
 Additionally, the google maps API documentation offered some starter solutions with which this project was oriented. Their copyright licensing is as follows:
-
+```md
   Copyright 2021 Google LLC
 
   Licensed under the Apache License, Version 2.0 (the "License");
@@ -70,6 +70,7 @@ Additionally, the google maps API documentation offered some starter solutions w
   WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
   See the License for the specific language governing permissions and
   limitations under the License.
+```
 
 This site was built using [GitHub Pages](https://pages.github.com/).
 
