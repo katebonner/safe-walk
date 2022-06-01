@@ -186,35 +186,35 @@ function getTheDate() {
     var lon = origin.lng;
     var heatMapCrimeData = [];
 
-    // fetch("https://api.crimeometer.com/v1/incidents/raw-data?lat=" + lat+ "&lon=" + lon +"&datetime_ini=2022-01-01T14:59:55.711Z&datetime_end=2022-05-01T14:59:55.711Z&distance=10mi",
-    //    {headers: {'x-api-key': 'pgbV1LizyJ4fsUTmFh3bz193057NtVTh12U2UAyp'}})
-    //    .then((data) => 
-    //     data.json().then((data) => {
-    //         console.log(data)
-    //         for (var i = 0 ; i < data.incidents.length ; i++) {
-    //             var incident_lat = data.incidents[i].incident_latitude;
-    //             var incident_lon = data.incidents[i].incident_longitude;
-    //             if (data.incidents[i].incident_offense === "Assault Offenses") {
-    //                 var crimeDataObj = {
-    //                     location: new google.maps.LatLng(incident_lat, incident_lon), 
-    //                     weight: 50}
-    //                 heatMapCrimeData.push(crimeDataObj);
-    //             }
-    //             if (data.incidents[i].incident_offense === "Robbery") {
-    //                 var crimeDataObj = {
-    //                     location: new google.maps.LatLng(incident_lat, incident_lon), 
-    //                     weight: 25}
-    //                 heatMapCrimeData.push(crimeDataObj);
-    //             }
-    //             if (data.incidents[i].incident_offense === "Larceny/Theft Offenses") {
-    //                 var crimeDataObj = {
-    //                     location: new google.maps.LatLng(incident_lat, incident_lon), 
-    //                     weight: 15}
-    //                 heatMapCrimeData.push(crimeDataObj);
-    //             }
-    //         }
-    //     })
-    //    )
+    fetch("https://api.crimeometer.com/v1/incidents/raw-data?lat=" + lat+ "&lon=" + lon +"&datetime_ini=2022-01-01T14:59:55.711Z&datetime_end=2022-05-01T14:59:55.711Z&distance=10mi",
+       {headers: {'x-api-key': 'pgbV1LizyJ4fsUTmFh3bz193057NtVTh12U2UAyp'}})
+       .then((data) => 
+        data.json().then((data) => {
+            console.log(data)
+            for (var i = 0 ; i < data.incidents.length ; i++) {
+                var incident_lat = data.incidents[i].incident_latitude;
+                var incident_lon = data.incidents[i].incident_longitude;
+                if (data.incidents[i].incident_offense === "Assault Offenses") {
+                    var crimeDataObj = {
+                        location: new google.maps.LatLng(incident_lat, incident_lon), 
+                        weight: 50}
+                    heatMapCrimeData.push(crimeDataObj);
+                }
+                if (data.incidents[i].incident_offense === "Robbery") {
+                    var crimeDataObj = {
+                        location: new google.maps.LatLng(incident_lat, incident_lon), 
+                        weight: 25}
+                    heatMapCrimeData.push(crimeDataObj);
+                }
+                if (data.incidents[i].incident_offense === "Larceny/Theft Offenses") {
+                    var crimeDataObj = {
+                        location: new google.maps.LatLng(incident_lat, incident_lon), 
+                        weight: 15}
+                    heatMapCrimeData.push(crimeDataObj);
+                }
+            }
+        })
+       )
 
     var dummyData = [
         {location: new google.maps.LatLng( 40.7323614, -73.9948174), weight: 50},
@@ -230,6 +230,9 @@ function getTheDate() {
         {location: new google.maps.LatLng( 40.7303614, -73.9948174), weight: 50},
         {location: new google.maps.LatLng( 40.7323614, -73.9948174), weight: 50}
     ] 
+
+    console.log(heatMapCrimeData);
+    console.log(dummyData);
 
     var gradient = [
           'rgba(0, 255, 255, 0)',
@@ -249,13 +252,11 @@ function getTheDate() {
         ]
     
     var heatmap = new google.maps.visualization.HeatmapLayer({
-        data: dummyData
+        //data: dummyData
+        data: heatMapCrimeData
     });
 
     heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-
-    console.log(heatMapCrimeData);
-
     heatmap.setMap(commutesMap);
    
   }
