@@ -4,7 +4,7 @@
 
 This project leverages the [Google Maps API](https://developers.google.com/maps) and the [CrimeoMeter API](https://www.crimeometer.com/) to display a heat map of recent assault and robbery locations within 10 miles of the users position. This visual element is bolstered with directions to a desired destination input by the user.
 
-![lading page](./assets/IMAGES/landing.png)
+![landing page](./assets/IMAGES/landing.png)
 
 
 **Copied here is a link to the deployed application:**
