@@ -165,7 +165,7 @@ function Commutes(configuration) {
 
     setTravelModeLayer(configuration.defaultTravelMode);
     createMarker(origin);
-    console.log(origin);
+
 
     // COLLECT THE CURRENT TIME EVERY SECOND
     function getTheDate() {
@@ -182,10 +182,8 @@ function Commutes(configuration) {
 }
 
     // HEAT MAP DATA 
-    var lat = origin.lat;
-    var lon = origin.lng;
     
-
+    // STATIC DATA IN CASE WE RUN OUT OF API REQUESTS
     // var heatMapStaticData = [
     //     {location: new google.maps.LatLng( 40.6467662, -73.9702363), weight: 25},
     //     {location: new google.maps.LatLng( 40.665934, -73.909359), weight: 50},
@@ -265,35 +263,43 @@ function Commutes(configuration) {
     //     {location: new google.maps.LatLng( 40.7392399, -73.9991802), weight: 25}
     // ];
 
+    // API FETCH VARIABLES
+    var lat = origin.lat;
+    var lon = origin.lng;
+    var date = getTheDate(); 
+    var iniYear = date.year - 1;
+    var endYear = date.year;
+    var iniEndMonth = date.month.toString();
+        if (iniEndMonth.length < 2) {
+            iniEndMonth = "0" + iniEndMonth;
+        }
+    var iniEndDay = date.day.toString();
+        if (iniEndDay.length < 2) {
+            iniEndDay = "0" + iniEndDay;
+        }
 
-    fetch("https://api.crimeometer.com/v1/incidents/raw-data?lat=" + lat+ "&lon=" + lon +"&datetime_ini=2022-01-01T14:59:55.711Z&datetime_end=2022-05-01T14:59:55.711Z&distance=10mi",
+  
+    fetch("https://api.crimeometer.com/v1/incidents/raw-data?lat=" + lat+ "&lon=" + lon +"&datetime_ini="+iniYear+"-"+iniEndMonth+"-"+iniEndDay+"T14:59:55.711Z&datetime_end="+endYear+"-"+iniEndMonth+"-"+iniEndDay+"T14:59:55.711Z&distance=10mi",
        {headers: {'x-api-key': 'pgbV1LizyJ4fsUTmFh3bz193057NtVTh12U2UAyp'}})
        .then((data) => 
         data.json().then((data) => {
-            console.log(data)
             for (var i = 0 ; i < data.incidents.length ; i++) {
                 var incident_lat = data.incidents[i].incident_latitude;
                 var incident_lon = data.incidents[i].incident_longitude;
                 var heatMapDynamicData = []
                 if (data.incidents[i].incident_offense === "Assault Offenses") {
-                    console.log(incident_lat);
-                    console.log(incident_lon);
                     var crimeDataObj = {
                         location: new google.maps.LatLng(incident_lat, incident_lon), 
                         weight: 50}
                     heatMapDynamicData.push(crimeDataObj);
                 }
                 if (data.incidents[i].incident_offense === "Robbery") {
-                    console.log(incident_lat);
-                    console.log(incident_lon);
                     var crimeDataObj = {
                         location: new google.maps.LatLng(incident_lat, incident_lon), 
                         weight: 25}
                     heatMapDynamicData.push(crimeDataObj);
                 }
                 if (data.incidents[i].incident_offense === "Larceny/Theft Offenses") {
-                    console.log(incident_lat);
-                    console.log(incident_lon);
                     var crimeDataObj = {
                         location: new google.maps.LatLng(incident_lat, incident_lon), 
                         weight: 15}
@@ -301,7 +307,7 @@ function Commutes(configuration) {
                 }
 
                 console.log(heatMapDynamicData);
-                console.log(heatMapStaticData);
+                //console.log(heatMapStaticData);
             
                 var gradient = [
                       'rgba(0, 255, 255, 0)',
