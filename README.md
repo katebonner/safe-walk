@@ -44,11 +44,11 @@ code .
 
 This project maps a user's current location to a map, layered with a heat map that is populated with recent assault and robbery location data. The user can then input a destination to retrieve directions to it from their current position.
 
-[enter destination](./assets/IMAGES/enter.png)
+![enter destination](./assets/IMAGES/enter.png)
 
  Along their path home, they will be able to see when they are coming up on a location with a recent incident of assault or robbery.
 
- [directions](./assets/IMAGES/directions.png)
+![directions](./assets/IMAGES/directions.png)
 
 
 ## Credits
