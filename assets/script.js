@@ -279,63 +279,63 @@ function Commutes(configuration) {
         }
 
   
-    fetch("https://api.crimeometer.com/v1/incidents/raw-data?lat=" + lat+ "&lon=" + lon +"&datetime_ini="+iniYear+"-"+iniEndMonth+"-"+iniEndDay+"T14:59:55.711Z&datetime_end="+endYear+"-"+iniEndMonth+"-"+iniEndDay+"T14:59:55.711Z&distance=10mi",
-       {headers: {'x-api-key': 'pgbV1LizyJ4fsUTmFh3bz193057NtVTh12U2UAyp'}})
-       .then((data) => 
-        data.json().then((data) => {
-            for (var i = 0 ; i < data.incidents.length ; i++) {
-                var incident_lat = data.incidents[i].incident_latitude;
-                var incident_lon = data.incidents[i].incident_longitude;
-                var heatMapDynamicData = []
-                if (data.incidents[i].incident_offense === "Assault Offenses") {
-                    var crimeDataObj = {
-                        location: new google.maps.LatLng(incident_lat, incident_lon), 
-                        weight: 50}
-                    heatMapDynamicData.push(crimeDataObj);
-                }
-                if (data.incidents[i].incident_offense === "Robbery") {
-                    var crimeDataObj = {
-                        location: new google.maps.LatLng(incident_lat, incident_lon), 
-                        weight: 25}
-                    heatMapDynamicData.push(crimeDataObj);
-                }
-                if (data.incidents[i].incident_offense === "Larceny/Theft Offenses") {
-                    var crimeDataObj = {
-                        location: new google.maps.LatLng(incident_lat, incident_lon), 
-                        weight: 15}
-                    heatMapDynamicData.push(crimeDataObj);
-                }
+    // fetch("https://api.crimeometer.com/v1/incidents/raw-data?lat=" + lat+ "&lon=" + lon +"&datetime_ini="+iniYear+"-"+iniEndMonth+"-"+iniEndDay+"T14:59:55.711Z&datetime_end="+endYear+"-"+iniEndMonth+"-"+iniEndDay+"T14:59:55.711Z&distance=10mi",
+    //    {headers: {'x-api-key': 'pgbV1LizyJ4fsUTmFh3bz193057NtVTh12U2UAyp'}})
+    //    .then((data) => 
+    //     data.json().then((data) => {
+    //         for (var i = 0 ; i < data.incidents.length ; i++) {
+    //             var incident_lat = data.incidents[i].incident_latitude;
+    //             var incident_lon = data.incidents[i].incident_longitude;
+    //             var heatMapDynamicData = []
+    //             if (data.incidents[i].incident_offense === "Assault Offenses") {
+    //                 var crimeDataObj = {
+    //                     location: new google.maps.LatLng(incident_lat, incident_lon), 
+    //                     weight: 50}
+    //                 heatMapDynamicData.push(crimeDataObj);
+    //             }
+    //             if (data.incidents[i].incident_offense === "Robbery") {
+    //                 var crimeDataObj = {
+    //                     location: new google.maps.LatLng(incident_lat, incident_lon), 
+    //                     weight: 25}
+    //                 heatMapDynamicData.push(crimeDataObj);
+    //             }
+    //             if (data.incidents[i].incident_offense === "Larceny/Theft Offenses") {
+    //                 var crimeDataObj = {
+    //                     location: new google.maps.LatLng(incident_lat, incident_lon), 
+    //                     weight: 15}
+    //                 heatMapDynamicData.push(crimeDataObj);
+    //             }
 
-                console.log(heatMapDynamicData);
-                //console.log(heatMapStaticData);
+    //             console.log(heatMapDynamicData);
+    //             //console.log(heatMapStaticData);
             
-                var gradient = [
-                      'rgba(0, 255, 255, 0)',
-                      'rgba(0, 255, 255, 1)',
-                      'rgba(0, 191, 255, 1)',
-                      'rgba(0, 127, 255, 1)',
-                      'rgba(0, 63, 255, 1)',
-                      'rgba(0, 0, 255, 1)',
-                      'rgba(0, 0, 223, 1)',
-                      'rgba(0, 0, 191, 1)',
-                      'rgba(0, 0, 159, 1)',
-                      'rgba(0, 0, 127, 1)',
-                      'rgba(63, 0, 91, 1)',
-                      'rgba(127, 0, 63, 1)',
-                      'rgba(191, 0, 31, 1)',
-                      'rgba(255, 0, 0, 1)'
-                    ]
+    //             var gradient = [
+    //                   'rgba(0, 255, 255, 0)',
+    //                   'rgba(0, 255, 255, 1)',
+    //                   'rgba(0, 191, 255, 1)',
+    //                   'rgba(0, 127, 255, 1)',
+    //                   'rgba(0, 63, 255, 1)',
+    //                   'rgba(0, 0, 255, 1)',
+    //                   'rgba(0, 0, 223, 1)',
+    //                   'rgba(0, 0, 191, 1)',
+    //                   'rgba(0, 0, 159, 1)',
+    //                   'rgba(0, 0, 127, 1)',
+    //                   'rgba(63, 0, 91, 1)',
+    //                   'rgba(127, 0, 63, 1)',
+    //                   'rgba(191, 0, 31, 1)',
+    //                   'rgba(255, 0, 0, 1)'
+    //                 ]
                 
-                var heatmap = new google.maps.visualization.HeatmapLayer({
-                    data: heatMapDynamicData
-                    //data: heatMapStaticData
-                });
+    //             var heatmap = new google.maps.visualization.HeatmapLayer({
+    //                 data: heatMapDynamicData
+    //                 //data: heatMapStaticData
+    //             });
             
-                heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
-                heatmap.setMap(commutesMap);
-            }
-        })
-       )
+    //             heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
+    //             heatmap.setMap(commutesMap);
+    //         }
+    //     })
+    //    )
    
   }
 

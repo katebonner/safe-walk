@@ -17,9 +17,12 @@
 <html lang="en">
   <head>
     <title>safe walk</title>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width,initial-scale=1" />
-    <link rel="stylesheet" href="assets/style.css" />
+
+    <meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="assets/style.css">
+
   </head>
   <body>
     <!-- Defined commutes SVGs -->
@@ -128,27 +131,29 @@
     <!-- End commutes SVGs -->
 
     <main class="commutes">
-      <div class="contacts">
-        <form>
-          <label for="exampleContactName">add emergency contact</label>
-          <input
-            type="text"
-            class="form-control name"
-            id="exampleContactName"
-            aria-describedby="contactName"
-            placeholder="  name"
-          />
 
-          <label for="examplePhoneNumber"></label>
-          <input
-            type="tel"
-            class="form-control mobileNumber"
-            id="examplePhoneNumber"
-            placeholder="  mobile number"
-          />
-          <button type="button" class="btn btn-primary submit">submit</button>
-        </form>
-      </div>
+      <div class="contacts mb-8">
+            <form>
+                <label for="exampleContactName">add emergency contact</label>
+                <input
+                  type="text"
+                  class="form-control name"
+                  id="exampleContactName"
+                  aria-describedby="contactName"
+                  placeholder="  name"
+                />
+        
+                <label for="examplePhoneNumber"></label>
+                <input
+                  type="tel"
+                  class="form-control mobileNumber"
+                  id="examplePhoneNumber"
+                  placeholder="  mobile number"
+                />
+              <button type="button" class="btn btn-primary submit h-10 w-13 text-center rounded-xl bg-green-400  hover:bg-green-450 active:bg-green-400 ">  submit</button>
+            </form>
+      </div>  
+
       <div class="commutes-map" aria-label="Map">
         <div class="map-view"></div>
       </div>
@@ -157,7 +162,7 @@
         <div class="commutes-initial-state">
           <div class="description">
             <h1 class="heading">find your safe walk home</h1>
-            <p>see travel time and directions</p>
+            <p>see travel time, directions, and zones to avoid</p>
           </div>
           <button class="add-button">
             <svg
@@ -235,10 +240,10 @@
             <div class="error-message"></div>
           </form>
           <div class="modal-action-bar">
-            <button class="delete-destination-button hide" type="reset">
-              Delete
-            </button>
-            <button class="cancel-button" type="reset">Cancel</button>
+            
+            <button class="delete-destination-button hide" type="reset">Delete</button>
+            <button class="cancel-button mr-4" type="reset">Cancel</button>
+
             <button class="add-destination-button" type="button">Add</button>
             <button class="edit-destination-button hide" type="button">
               Done
