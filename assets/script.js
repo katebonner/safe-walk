@@ -324,8 +324,8 @@ function Commutes(configuration) {
                     ]
                 
                 var heatmap = new google.maps.visualization.HeatmapLayer({
-                    data: heatMapDynamicData
-                    //data: heatMapStaticData
+                    //data: heatMapDynamicData
+                    data: heatMapStaticData
                 });
             
                 heatmap.set('gradient', heatmap.get('gradient') ? null : gradient);
